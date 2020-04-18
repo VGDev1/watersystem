@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+    Välkommen, {{ name }}!
+  </h1>
+  <div class="columns"> 
+    <div class="column">
+      <button class="button is-large is-success">Sätt på bevattning</button>
+    </div>
+    <div class="column">
+      <button class="button is-large is-danger">Slå av bevattning</button>
+    </div>
+  </div>
+{% endblock %}
