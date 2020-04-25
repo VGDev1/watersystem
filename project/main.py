@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify
 from . import db
 import json
 from flask_login import login_required, current_user
@@ -30,6 +30,7 @@ def turnOn():
     
     if waterTime:
         flash('Bevattning aktiverad')
+        # Some code here to activate the relay
         data = {}
         data['logs'] = []
         now = datetime.now()
@@ -56,4 +57,22 @@ def turnOn():
 @login_required
 def turnOff():
     flash('Bevattning avavktiverad')
+    #Missing code here
     return redirect(url_for('main.control'))
+
+@main.route('/log')
+@login_required
+def log():
+    return render_template('log.html')
+
+@main.route('/json')
+@login_required
+def getJson():
+        data = {}
+        try:
+            with open('log.txt', 'r') as json_file:
+                    data = json.load(json_file)
+        except:
+            print(data)
+        finally:
+            return jsonify(data)

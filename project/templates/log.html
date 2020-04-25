@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  Loggbok
+</h1>
+<style>
+  .table {
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+<table id="tableID" class="table is-fullwidth is-hoverable" >
+    <script type="text/javascript">
+        async function jsonToTable(json) {
+          const data = await fetch('http://127.0.0.1:5000/json')
+          const parsejson = await data.json()
+          var columns = [];
+          var tablethread = "<thead><tr>";
+          for (x in parsejson.logs[0]) {
+            columns.push(x);
+            tablethread += "<th>" + x + "</th>";
+          }
+          tablethread += "</tr></thead>";
+          document.getElementById("tableID").innerHTML = tablethread;
+          var table_rows = "<tbody>";
+          for (var i = 0; i < parsejson.logs.length; i++) {
+            var x = parsejson.logs[i];
+            var json2 = x;
+            var row = "<tr>";
+            for (d in x) {
+              var sty = x[d];
+              if (sty != null) {
+                var st = sty.toString();
+                var reps = "<\\";
+                row += "<td><p>" + st.split("<").join("&lt;") + "</p></td>";
+              } else {
+                row += "<td><p>null</p></td>";
+              }
+            }
+            row += "</tr>";
+            table_rows += row;
+          }
+          table_rows += "</tbody>";
+          document.getElementById("tableID").innerHTML += table_rows;
+        }
+        var jsonstring = '[{ "name":"John", "age":30, "car":"BMW"},'+
+        '{ "name":"Wick", "age":50,"car":"DODGE" }]';
+
+        var jsontest = '{"logs": [{"date": "04/25/2020", "time": "20:35:54", "duration": "50"}, {"date": "04/25/2020", "time": "20:37:15", "duration": "100"}, {"date": "04/25/2020", "time": "20:37:26", "duration": "200"}]}'
+        jsonToTable(jsontest);
+      </script>
+</table>
+{% endblock %}
