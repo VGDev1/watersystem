@@ -3,13 +3,27 @@
 {% block content %}
 <h1 class="title">
     Välkommen, {{ name }}!
-  </h1>
-  <div class="columns"> 
-    <div class="column">
-      <button class="button is-large is-success">Sätt på bevattning</button>
-    </div>
-    <div class="column">
-      <button class="button is-large is-danger">Slå av bevattning</button>
-    </div>
+    <div class="column is-4 is-offset-4">
+      <div class="box">
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              <div class="notification is-info">
+                  {{ messages[0] }}
+              </div>
+          {% endif %}
+          {% endwith %}
+          <form method="POST" action="/setting">
+              <div class="field">
+                  <div class="control">
+                      <input class="input is-large" type="texts" name="watertime" placeholder="Bevattningstid i minuter">
+                  </div>
+              </div>
+              <button class="button is-block is-success is-large is-fullwidth">Sätt på bevattning</button>
+          </form>
+          <form method="POST" action="/turnoff">
+            <button class="button is-block is-danger is-large is-fullwidth">Stäng av bevattning</button>
+          </form>
+
+      </div>
   </div>
 {% endblock %}
