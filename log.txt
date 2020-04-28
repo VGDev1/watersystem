@@ -1,1 +1,1 @@
-{"logs": [{"date": "04/25/2020", "time": "20:35:54", "duration": "50"}, {"date": "04/25/2020", "time": "20:37:15", "duration": "100"}, {"date": "04/25/2020", "time": "20:37:26", "duration": "200"}, {"date": "04/25/2020", "time": "22:16:08", "duration": "150"}]}
+{"logs": [{"event": "activated", "date": "04/28/2020", "time": "18:13:29", "duration": "120min"}, {"event": "activated", "date": "04/28/2020", "time": "18:13:32", "duration": "100min"}, {"event": "deactivated", "date": "04/28/2020", "time": "18:13:33", "duration": "-"}]}

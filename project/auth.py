@@ -6,6 +6,8 @@ from . import db
 
 auth = Blueprint('auth', __name__)
 
+approvedEmails = ['victor@educar.se', 'info@hrck.se', 'mikael.moberg@bergendahls.se', 'mikael.moberg@telia.com', 'fredrik@educar.se']
+
 @auth.route('/logout')
 @login_required
 def logout():
@@ -50,6 +52,10 @@ def signup_post():
         flash('Email address already exists')
         print("this")
         return redirect(url_for('auth.signup'))
+
+    if not email in approvedEmails:
+        flash('This email is not approved by system administrator')
+        return redirect(url_for('auth.signup')) # if user doesn't exist or password is wrong, reload the page
 
     # create new user with the form data. Hash the password so plaintext version isn't saved.
     new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
