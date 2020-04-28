@@ -64,7 +64,10 @@ def turnOn():
 @login_required
 def turnOff():
     flash('Bevattning avavktiverad')
-    con.deactivateWater()
+    global con
+    if con != None:
+        con.deactivateWater()
+    
     data = {}
     data['logs'] = []
     now = datetime.now()
