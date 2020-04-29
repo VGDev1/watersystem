@@ -39,6 +39,9 @@
                             <a href="{{ url_for('main.log') }}" class="navbar-item">
                                 Log
                             </a>
+                            <a href="{{ url_for('main.camera') }}" class="navbar-item">
+                                Camera
+                            </a>
                             {% endif %}
                             {% if not current_user.is_authenticated %}
                             <a href="{{ url_for('auth.login') }}" class="navbar-item">
