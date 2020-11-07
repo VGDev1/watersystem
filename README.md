@@ -19,7 +19,7 @@ The FLASK_DEBUG environment variable is enabled by setting it to 1. This will en
 `flask run` in the project directory
 
 ## Account 
-Use demo account with email: "infor@hrck.se" and password: "password"
+Use demo account with email: "info@hrck.se" and password: "password"
 
 
 
