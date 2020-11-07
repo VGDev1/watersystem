@@ -12,6 +12,14 @@ The FLASK_APP environment variable instructs Flask how to load the app. It shoul
 4. `export FLASK_DEBUG=1` 
 The FLASK_DEBUG environment variable is enabled by setting it to 1. This will enable a debugger that will display application errors in the browser.
 
+## Create database
+1. Change directory to project root `cd watersystem`
+2. Start the Python repl: `python3`
+3. Run these two lines: 
+`from project import db, create_app` and
+`db.create_all(app=create_app())`
+
+
 ## Requirments
 - Python3
 

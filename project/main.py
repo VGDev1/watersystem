@@ -28,7 +28,7 @@ def writeToLogFile(event, waterTime):
     current_time = now.strftime("%H:%M:%S")
     current_date = now.strftime("%m/%d/%Y")
     try: 
-        with open('log.txt', 'r') as json_file:
+        with open('resources/log.txt', 'r') as json_file:
             data = json.load(json_file)
     except:
         print("exception")
