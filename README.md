@@ -1,5 +1,4 @@
-# Automated watersystem HRCBK
-## An automatic watersystem for RaspberryPi
+# Automated watersystem HRCBK for a RaspberryPi
 ![picture](resources/homepage.png) 
 
 ## Installation
@@ -18,6 +17,9 @@ The FLASK_DEBUG environment variable is enabled by setting it to 1. This will en
 
 ## Run
 `flask run` in the project directory
+
+## Account 
+Use demo account with email: "infor@hrck.se" and password: "password"
 
 
 

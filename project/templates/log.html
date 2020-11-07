@@ -12,8 +12,8 @@
 </style>
 <table id="tableID" class="table is-fullwidth is-hoverable" >
     <script type="text/javascript">
-        async function jsonToTable() {
-          const data = await fetch('http://hrcbkwater.ddns.net:5000/json')
+        async function jsonToTable() { // Old style javascript using var, should be updated to const and let
+          const data = await fetch('http://127.0.0.1:5000/json')
           const parsejson = await data.json()
           var columns = [];
           var tablethread = "<thead><tr>";
@@ -44,8 +44,6 @@
           table_rows += "</tbody>";
           document.getElementById("tableID").innerHTML += table_rows;
         }
-        var jsonstring = '[{ "name":"John", "age":30, "car":"BMW"},'+
-        '{ "name":"Wick", "age":50,"car":"DODGE" }]';
         jsonToTable();
       </script>
 </table>

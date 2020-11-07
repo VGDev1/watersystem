@@ -4,7 +4,7 @@ import json
 from flask_login import login_required, current_user
 from datetime import date, datetime
 import _thread
-from .controller import *
+#? from .controller import * uncomment this when run on raspberry pi
 main = Blueprint('main', __name__)
 
 data = {}
@@ -21,6 +21,27 @@ def index():
 def control():
     return render_template('control.html', name = current_user.name)
 
+def writeToLogFile(event, waterTime):
+    data = {}
+    data['logs'] = []
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    current_date = now.strftime("%m/%d/%Y")
+    try: 
+        with open('log.txt', 'r') as json_file:
+            data = json.load(json_file)
+    except:
+        print("exception")
+    finally:
+        data['logs'].append({
+            'event': event,
+            'date': current_date,
+            'time': current_time,
+            'duration': waterTime
+        })
+    with open('log.txt', 'w+') as outfile:
+        json.dump(data, outfile)
+
 
 @main.route('/setting', methods=['POST'])
 @login_required
@@ -33,32 +54,12 @@ def turnOn():
     
     if waterTime:
         flash('Bevattning aktiverad')
-        # Some code here to activate the relay
         global con
-        con = Controller(waterTime)
-        _thread.start_new_thread(con.activateWater, ())    
-        data = {}
-        data['logs'] = []
-        now = datetime.now()
-        current_time = now.strftime("%H:%M:%S")
-        current_date = now.strftime("%m/%d/%Y")
-        try: 
-            with open('log.txt', 'r') as json_file:
-                data = json.load(json_file)
-        except:
-            print("wtf")
-        finally:
-            data['logs'].append({
-                'event': 'activated',
-                'date': current_date,
-                'time': current_time,
-                'duration': waterTime + "min"
-            })
-        with open('log.txt', 'w+') as outfile:
-            json.dump(data, outfile)
+        #? con = Controller(waterTime) uncomment when run on raspberry 
+        #?_thread.start_new_thread(con.activateWater, ()) uncomment when run on raspberry   
+        writeToLogFile('activated', waterTime)
         return redirect(url_for('main.control'))
         print(f"bevattning på {waterTime}")
-
 
 @main.route('/turnoff', methods=['POST'])
 @login_required
@@ -68,28 +69,7 @@ def turnOff():
     if con != None:
         con.deactivateWater()
         print("deactivated")
-    
-    data = {}
-    data['logs'] = []
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    current_date = now.strftime("%m/%d/%Y")
-    try: 
-        with open('log.txt', 'r') as json_file:
-            data = json.load(json_file)
-    except:
-        print("wtf")
-    finally:
-        data['logs'].append({
-            'event': 'deactivated',
-            'date': current_date,
-            'time': current_time,
-            'duration': '-'
-        })
-    with open('log.txt', 'w+') as outfile:
-        json.dump(data, outfile)
-    return redirect(url_for('main.control'))
-    #Missing code here
+    writeToLogFile('deactivated', '-') 
     return redirect(url_for('main.control'))
 
 @main.route('/log')

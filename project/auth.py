@@ -23,7 +23,6 @@ def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
-
     user = User.query.filter_by(email=email).first()
 
     # check if user actually exists
@@ -53,7 +52,7 @@ def signup_post():
         print("this")
         return redirect(url_for('auth.signup'))
 
-    if not email in approvedEmails:
+    if not email in approvedEmails: 
         flash('This email is not approved by system administrator')
         return redirect(url_for('auth.signup')) # if user doesn't exist or password is wrong, reload the page
 
