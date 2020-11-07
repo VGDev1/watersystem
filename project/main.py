@@ -4,7 +4,7 @@ import json
 from flask_login import login_required, current_user
 from datetime import date, datetime
 import _thread
-#from .controller import *
+from .controller import *
 main = Blueprint('main', __name__)
 
 data = {}
@@ -35,8 +35,8 @@ def turnOn():
         flash('Bevattning aktiverad')
         # Some code here to activate the relay
         global con
-        #con = Controller(waterTime)
-        #_thread.start_new_thread(con.activateWater, ())    
+        con = Controller(waterTime)
+        _thread.start_new_thread(con.activateWater, ())    
         data = {}
         data['logs'] = []
         now = datetime.now()
@@ -66,7 +66,7 @@ def turnOff():
     flash('Bevattning avavktiverad')
     global con
     if con != None:
-        #con.deactivateWater()
+        con.deactivateWater()
         print("deactivated")
     
     data = {}

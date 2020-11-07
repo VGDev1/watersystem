@@ -6,7 +6,7 @@ from . import db
 
 auth = Blueprint('auth', __name__)
 
-approvedEmails = ['victor@educar.se', 'info@hrck.se', 'mikael.moberg@bergendahls.se', 'mikael.moberg@telia.com', 'fredrik@educar.se']
+approvedEmails = ['marcuslarsen89@gmail.com', 'victor@educar.se', 'info@hrck.se', 'mikael.moberg@bergendahls.se', 'mikael.moberg@telia.com', 'fredrik@educar.se']
 
 @auth.route('/logout')
 @login_required
