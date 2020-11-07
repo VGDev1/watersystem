@@ -10,7 +10,7 @@ main = Blueprint('main', __name__)
 data = {}
 data['logs'] = []
 con = None 
-
+logFile = 'resources/log.txt'
 
 @main.route('/')
 def index():
@@ -22,13 +22,11 @@ def control():
     return render_template('control.html', name = current_user.name)
 
 def writeToLogFile(event, waterTime):
-    data = {}
-    data['logs'] = []
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     current_date = now.strftime("%m/%d/%Y")
     try: 
-        with open('resources/log.txt', 'r') as json_file:
+        with open(logFile, 'r') as json_file:
             data = json.load(json_file)
     except:
         print("exception")
@@ -39,7 +37,7 @@ def writeToLogFile(event, waterTime):
             'time': current_time,
             'duration': waterTime
         })
-    with open('log.txt', 'w+') as outfile:
+    with open(logFile, 'w+') as outfile:
         json.dump(data, outfile)
 
 
@@ -87,7 +85,7 @@ def camera():
 def getJson():
         data = {}
         try:
-            with open('log.txt', 'r') as json_file:
+            with open(logFile, 'r') as json_file:
                     data = json.load(json_file)
         except:
             print(data)
