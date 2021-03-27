@@ -8,7 +8,7 @@ Hrcbk waterserver
 * password: same as hrcbkwater@gmail.com
 
 #### SSH:
-Use this command: `ssh -p 10300 hrcbkwater.duckdns.org`
+Use this command: `ssh -p 10300 pi@hrcbkwater.duckdns.org`
 
 #### Structure
 * Server directory: `/home/pi/Desktop/watersystem`
